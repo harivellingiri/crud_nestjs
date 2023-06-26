@@ -2,11 +2,11 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { AppService } from './app.service';
 import { User } from './user.dto';
 
-@Controller()
+@Controller('user')
 export class AppController {
   constructor(private readonly appService: AppService) { }
 
-  @Get('user/getuser/all')
+  @Get('getuser')
   async getUser() {
 
     console.log(process.env.AWS_REGION)
@@ -19,7 +19,7 @@ export class AppController {
     }
   }
 
-  @Post('user/create')
+  @Post('create')
   async createUser(@Body() user: User) {
     const crtuser = await this.appService.createUser(user)
     if (!crtuser) {
@@ -29,7 +29,7 @@ export class AppController {
     }
   }
 
-  @Put('user/update/:id')
+  @Put(':id')
   async updateUser(@Param('id') id: string, @Body() user: User) {
     const updateuser = await this.appService.updateUser(id, user)
     if (!updateuser) {
@@ -39,7 +39,7 @@ export class AppController {
     }
   }
 
-  @Get('user/getuser/:id')
+  @Get('getuser/:id')
   async getSpecificUser(@Param('id') id: string) {
     const speuser = await this.appService.getSpecficUser(id)
     if (!speuser) {
@@ -49,7 +49,7 @@ export class AppController {
     }
   }
 
-  @Delete('user/delete/:id')
+  @Delete(':id')
   async deleteUser(@Param('id') id: string) {
     const deleteuser = await this.appService.deleteUser(id)
     console.log(deleteuser)

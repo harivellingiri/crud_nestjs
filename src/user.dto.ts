@@ -6,9 +6,11 @@ export class User {
     @ApiProperty()
     name: string;
     @ApiProperty()
-    age: number;
+    email: string;
     @ApiProperty()
-    salary: number;
+    phone: string;
     @ApiProperty()
-    company: string;
+    enroll: string;
+    @ApiProperty()
+    admission: string;
 }

@@ -12,6 +12,7 @@ export class AppService {
     }
     try {
       const { Items = [] } = await db.scan(params).promise()
+      console.log(Items)
       return Items
 
     } catch (error) {
@@ -41,15 +42,16 @@ export class AppService {
         userId: id
       },
       UpdateExpression:
-        'set #ag = :age, #com = :company, #nam = :name,#sal=:salary',
+        'set #emai = :email, #phon = :phone, #nam = :name, #enrol = :enroll,#admis=:admission',
       ExpressionAttributeValues: {
-        ":age": user.age, ":company": user.company, ":name": user.name, ":salary": user.salary,
+        ":email": user.email, ":phone": user.phone, ":name": user.name, ":enroll": user.enroll, ":admission": user.admission,
       },
       ExpressionAttributeNames: {
-        "#ag": "age",
-        "#com": "company",
+        "#emai": "email",
+        "#phon": "phone",
         "#nam": "name",
-        "#sal": "salary",
+        "#admis": "admission",
+        "#enrol": "enroll",
       }
     }
     // UpdateExpression = 'SET #ts = :val1',
@@ -80,6 +82,7 @@ export class AppService {
 
     try {
       await db.delete(params).promise()
+      console.log("user deleted")
       return true
 
     } catch (error) {
